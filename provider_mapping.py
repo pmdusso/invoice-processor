@@ -11,6 +11,8 @@ import logging
 from pathlib import Path
 from typing import Dict, Optional, List, Tuple, Any
 import os
+import tempfile
+import shutil
 from datetime import datetime
 
 # Configure logging
@@ -208,23 +210,44 @@ class ProviderMapper:
 
     # Placeholder for save method - to be implemented in the next task
     def _save_mappings_to_json(self) -> None:
-        """Save the current in-memory mappings back to the JSON file."""
+        """Save the current in-memory mappings back to the JSON file using atomic operations."""
         # Ensure mappings_data is initialized (e.g., if load failed)
         if not self.mappings_data:
-            self.mappings_data = {"version": "1.0.0", "schema": {}, "mappings": []} 
+            self.mappings_data = {"version": "1.0.0", "schema": {}, "mappings": []}
 
         # Update the mappings list and last_updated timestamp
         self.mappings_data["mappings"] = self.provider_mappings
         self.mappings_data["last_updated"] = datetime.utcnow().isoformat() + "Z"
 
+        temp_file_path = None
         try:
-            with open(self.mapping_file, 'w') as f:
-                json.dump(self.mappings_data, f, indent=4)
-            logger.info(f"Saved {len(self.provider_mappings)} mappings to {self.mapping_file}")
-        except IOError as e:
-            logger.error(f"Error saving mappings to {self.mapping_file}: {str(e)}")
+            # Create a temporary file in the same directory to ensure atomic move
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, dir=self.mapping_file.parent, suffix=".tmp") as temp_f:
+                temp_file_path = Path(temp_f.name)
+                json.dump(self.mappings_data, temp_f, indent=4)
+            
+            # Atomically replace the original file with the temporary file
+            shutil.move(str(temp_file_path), str(self.mapping_file))
+            logger.info(f"Saved {len(self.provider_mappings)} mappings atomically to {self.mapping_file}")
+            
+        except (IOError, OSError) as e:
+            logger.error(f"Error during atomic save to {self.mapping_file}: {str(e)}")
+            # Clean up temp file if it still exists upon error
+            if temp_file_path and temp_file_path.exists():
+                try:
+                    os.remove(temp_file_path)
+                    logger.debug(f"Cleaned up temporary file: {temp_file_path}")
+                except OSError as cleanup_e:
+                     logger.error(f"Error cleaning up temporary file {temp_file_path}: {cleanup_e}")
         except TypeError as e:
             logger.error(f"Error serializing mappings data to JSON: {str(e)}")
+            # Clean up temp file if serialization failed before move
+            if temp_file_path and temp_file_path.exists():
+                try:
+                    os.remove(temp_file_path)
+                    logger.debug(f"Cleaned up temporary file: {temp_file_path}")
+                except OSError as cleanup_e:
+                     logger.error(f"Error cleaning up temporary file {temp_file_path}: {cleanup_e}")
 
     def remove_mapping(self, pattern_to_remove: str) -> bool:
         """
