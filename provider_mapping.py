@@ -264,6 +264,13 @@ class ProviderMapper:
             shutil.move(str(temp_file_path), str(self.mapping_file))
             logger.info(f"Saved {len(self.provider_mappings)} mappings atomically to {self.mapping_file}")
             
+            # Log file size after successful save
+            try:
+                file_size = self.mapping_file.stat().st_size
+                logger.debug(f"Mapping file size: {file_size} bytes")
+            except OSError:
+                 pass # Ignore error getting size
+            
         except PermissionError as e:
              logger.critical(f"Permission denied during atomic save to {self.mapping_file}: {str(e)}. Save failed.")
              # Clean up temp file if permission error occurred during move
