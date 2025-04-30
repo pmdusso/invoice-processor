@@ -20,7 +20,7 @@
 
 ## 4. Add Backup System
 - [x] Implement automatic backup of JSON file before updates
-- [ ] Add restore functionality from backup
+- [x] Add restore functionality from backup
 - [ ] Create backup rotation system
 
 ## 5. Add Testing

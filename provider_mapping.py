@@ -302,6 +302,24 @@ class ProviderMapper:
             logger.warning(f"Pattern '{pattern_to_remove}' not found in mappings.")
             return False
 
+    def restore_from_backup(self) -> bool:
+        """Restores the mapping file from the backup (.bak) file if it exists."""
+        backup_file = self.mapping_file.with_suffix(self.mapping_file.suffix + ".bak")
+        if not backup_file.exists():
+            logger.error(f"Restore failed: Backup file not found at {backup_file}")
+            return False
+
+        try:
+            shutil.copy2(backup_file, self.mapping_file)
+            logger.info(f"Successfully restored mapping file from {backup_file}")
+            # Reload mappings after restoring
+            self._load_mappings_from_json()
+            self._compile_patterns()
+            return True
+        except (IOError, OSError) as e:
+            logger.error(f"Restore failed: Error copying backup file {backup_file} to {self.mapping_file}: {e}")
+            return False
+
 # Remove the old helper functions if they are fully replaced by class methods
 # def _load_mappings(mapping_file: Path) -> Dict[str, str]: ...
 # def _save_mappings(mappings: Dict[str, str]) -> None: ... 
