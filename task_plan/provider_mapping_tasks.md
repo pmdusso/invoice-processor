@@ -7,7 +7,7 @@
 
 ## 2. Modify ProviderMapper Class
 - [x] Update `__init__` to load mappings from JSON file
-- [ ] Add method to save mappings back to JSON
+- [x] Add method to save mappings back to JSON
 - [ ] Implement atomic file operations to prevent corruption
 - [ ] Add error handling for JSON operations
 - [ ] Add version checking for JSON schema compatibility

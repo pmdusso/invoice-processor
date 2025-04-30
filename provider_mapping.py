@@ -153,6 +153,7 @@ class ProviderMapper:
             self.compiled_patterns[regex] = provider
             logger.info(f"Added new mapping (in memory): {pattern} -> {provider}")
             # Note: Need to call save method to persist this change
+            self._save_mappings_to_json()
         except re.error as e:
              logger.warning(f"Invalid regex pattern '{pattern}' for provider '{provider}': {str(e)}. Mapping added to list but not compiled.")
 
@@ -187,7 +188,6 @@ class ProviderMapper:
              if not pattern_exists:
                  logger.info(f"Learned new pattern from OpenAI result: '{escaped_provider}' -> '{identified_provider}'")
                  self.add_mapping(escaped_provider, identified_provider, confidence=0.85, source="learned_openai")
-                 # Note: Need to call save method to persist this change
              else:
                  logger.debug(f"Pattern '{escaped_provider}' for provider '{identified_provider}' already exists.")
         else:
@@ -204,14 +204,27 @@ class ProviderMapper:
                     if not pattern_exists:
                         logger.info(f"Learned potential partial pattern from OpenAI result: '{pattern}' -> '{identified_provider}'")
                         self.add_mapping(pattern, identified_provider, confidence=0.75, source="learned_openai_partial")
-                        # Note: Need to call save method to persist this change
                         break # Maybe only add one partial pattern per result
 
     # Placeholder for save method - to be implemented in the next task
     def _save_mappings_to_json(self) -> None:
         """Save the current in-memory mappings back to the JSON file."""
-        logger.warning("_save_mappings_to_json is not yet implemented.")
-        pass
+        # Ensure mappings_data is initialized (e.g., if load failed)
+        if not self.mappings_data:
+            self.mappings_data = {"version": "1.0.0", "schema": {}, "mappings": []} 
+
+        # Update the mappings list and last_updated timestamp
+        self.mappings_data["mappings"] = self.provider_mappings
+        self.mappings_data["last_updated"] = datetime.utcnow().isoformat() + "Z"
+
+        try:
+            with open(self.mapping_file, 'w') as f:
+                json.dump(self.mappings_data, f, indent=4)
+            logger.info(f"Saved {len(self.provider_mappings)} mappings to {self.mapping_file}")
+        except IOError as e:
+            logger.error(f"Error saving mappings to {self.mapping_file}: {str(e)}")
+        except TypeError as e:
+            logger.error(f"Error serializing mappings data to JSON: {str(e)}")
 
     def remove_mapping(self, pattern_to_remove: str) -> bool:
         """
@@ -233,6 +246,7 @@ class ProviderMapper:
             # Recompile patterns after removal
             self._compile_patterns()
             # Note: Need to call save method to persist this change
+            self._save_mappings_to_json()
             return True
         else:
             logger.warning(f"Pattern '{pattern_to_remove}' not found in mappings.")
