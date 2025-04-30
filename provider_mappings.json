@@ -1,7 +1,9 @@
 {
+    "_comment_schema": "This file defines regex patterns to identify invoice providers.",
     "version": "1.0.0",
     "last_updated": "2024-07-28T10:00:00Z",
     "schema": {
+        "_comment": "Defines the structure and rules for the mappings.",
         "description": "Provider mapping configuration file",
         "required_fields": ["pattern", "provider", "confidence", "last_used"],
         "pattern_format": "regex",
@@ -9,6 +11,7 @@
     },
     "mappings": [
         {
+            "_comment": "Example mapping object.",
             "pattern": "Anysphere,? Inc\\.?",
             "provider": "Cursor",
             "confidence": 1.0,

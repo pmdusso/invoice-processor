@@ -30,7 +30,7 @@
 - [x] Test backup and restore functionality
 
 ## 6. Documentation
-- [ ] Document JSON schema
+- [x] Document JSON schema
 - [ ] Add examples of valid mappings
 - [ ] Document backup and restore procedures
 - [ ] Add troubleshooting guide
