@@ -131,8 +131,8 @@ class ProviderMapper:
 
     def add_mapping(self, pattern: str, provider: str, confidence: float = 0.8, source: str = "learned") -> None:
         """
-        Add a new provider mapping. This currently only updates the in-memory representation.
-        Saving to JSON needs to be implemented separately.
+        Add a new provider mapping, compile the pattern, and save the updated list.
+        Includes validation for the regex pattern and basic confidence range.
         
         Args:
             pattern: Regular expression pattern to match
@@ -145,6 +145,19 @@ class ProviderMapper:
             if existing_mapping.get("pattern") == pattern and existing_mapping.get("provider") == provider:
                 logger.debug(f"Mapping for pattern '{pattern}' and provider '{provider}' already exists. Skipping add.")
                 return
+
+        # Validate pattern and confidence
+        if not pattern or not provider:
+            logger.warning(f"Skipping add: Pattern and provider cannot be empty.")
+            return
+        try:
+            re.compile(pattern) # Check if pattern is a valid regex
+        except re.error as e:
+            logger.error(f"Invalid regex pattern provided '{pattern}': {e}. Skipping add.")
+            return
+        if not (0.0 <= confidence <= 1.0):
+             logger.warning(f"Confidence score {confidence} out of range [0.0, 1.0]. Clamping.")
+             confidence = max(0.0, min(1.0, confidence))
 
         new_mapping = {
             "pattern": pattern,
@@ -160,7 +173,6 @@ class ProviderMapper:
             regex = re.compile(pattern, re.IGNORECASE)
             self.compiled_patterns[regex] = provider
             logger.info(f"Added new mapping (in memory): {pattern} -> {provider}")
-            # Note: Need to call save method to persist this change
             self._save_mappings_to_json()
         except re.error as e:
              logger.warning(f"Invalid regex pattern '{pattern}' for provider '{provider}': {str(e)}. Mapping added to list but not compiled.")
