@@ -21,7 +21,7 @@
 ## 4. Add Backup System
 - [x] Implement automatic backup of JSON file before updates
 - [x] Add restore functionality from backup
-- [ ] Create backup rotation system
+- [x] Create backup rotation system
 
 ## 5. Add Testing
 - [ ] Create unit tests for JSON operations
