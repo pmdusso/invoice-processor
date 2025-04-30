@@ -229,6 +229,15 @@ class ProviderMapper:
     # Placeholder for save method - to be implemented in the next task
     def _save_mappings_to_json(self) -> None:
         """Save the current in-memory mappings back to the JSON file using atomic operations."""
+        # Create backup before saving
+        backup_file = self.mapping_file.with_suffix(self.mapping_file.suffix + ".bak")
+        if self.mapping_file.exists():
+            try:
+                shutil.copy2(self.mapping_file, backup_file)
+                logger.debug(f"Created backup file: {backup_file}")
+            except (IOError, OSError) as e:
+                 logger.warning(f"Could not create backup file {backup_file}: {e}")
+
         # Ensure mappings_data is initialized (e.g., if load failed)
         if not self.mappings_data:
             self.mappings_data = {"version": "1.0.0", "schema": {}, "mappings": []}
