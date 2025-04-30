@@ -51,7 +51,7 @@
 - [x] Optimize JSON file size
 
 ## 10. Monitoring
-- [ ] Add metrics for mapping hits/misses
+- [x] Add metrics for mapping hits/misses
 - [ ] Track learning success rate
 - [ ] Monitor JSON file size and growth
 

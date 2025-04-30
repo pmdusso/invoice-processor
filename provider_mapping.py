@@ -35,6 +35,7 @@ class ProviderMapper:
         self.mappings_data: Dict[str, Any] = {}
         self.provider_mappings: List[Dict[str, Any]] = []
         self.compiled_patterns: Dict[re.Pattern, str] = {}
+        self.hit_count = 0 # Initialize hit counter
 
         self._load_mappings_from_json()
         self._compile_patterns()
@@ -131,6 +132,7 @@ class ProviderMapper:
             if pattern.search(text):
                 logger.info(f"Identified provider '{provider}' using pattern matching: {pattern.pattern}")
                 # Future enhancement: Update last_used timestamp here
+                self.hit_count += 1 # Increment hit counter
                 return provider
         return None
 
