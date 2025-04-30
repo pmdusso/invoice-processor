@@ -16,7 +16,7 @@
 - [x] Modify `update_from_openai_result` to save new mappings to JSON
 - [x] Add validation for new mappings before saving
 - [x] Implement deduplication of similar patterns
-- [ ] Add confidence scoring for learned patterns
+- [x] Add confidence scoring for learned patterns
 
 ## 4. Add Backup System
 - [ ] Implement automatic backup of JSON file before updates
