@@ -24,7 +24,7 @@
 - [x] Create backup rotation system
 
 ## 5. Add Testing
-- [ ] Create unit tests for JSON operations
+- [x] Create unit tests for JSON operations
 - [ ] Add tests for learning mechanism
 - [ ] Test file locking and concurrent access
 - [ ] Test backup and restore functionality
