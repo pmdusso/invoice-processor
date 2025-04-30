@@ -53,6 +53,12 @@ class ProviderMapper:
             with open(self.mapping_file, 'r') as f:
                 self.mappings_data = json.load(f)
             
+            # Check version
+            loaded_version = self.mappings_data.get("version", "0.0.0")
+            # Simple check for major version compatibility
+            if not loaded_version.startswith("1."):
+                logger.warning(f"Mapping file {self.mapping_file} has incompatible version '{loaded_version}'. Expected version 1.x. Attempting to load anyway.")
+
             # Basic validation
             if "mappings" not in self.mappings_data or not isinstance(self.mappings_data["mappings"], list):
                 logger.error(f"Invalid format in mapping file {self.mapping_file}: 'mappings' array not found or not a list.")
