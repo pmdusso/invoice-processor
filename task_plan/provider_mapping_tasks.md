@@ -32,7 +32,7 @@
 ## 6. Documentation
 - [x] Document JSON schema
 - [x] Add examples of valid mappings
-- [ ] Document backup and restore procedures
+- [x] Document backup and restore procedures
 - [ ] Add troubleshooting guide
 
 ## 7. Integration

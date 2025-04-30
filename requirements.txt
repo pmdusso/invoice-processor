@@ -1,0 +1,5 @@
+PyPDF2==3.0.1
+openai>=1.76.2
+forex-python==1.8
+python-dotenv==1.0.0
+tqdm==4.66.1 
