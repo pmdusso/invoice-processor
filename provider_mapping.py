@@ -71,6 +71,9 @@ class ProviderMapper:
         except json.JSONDecodeError as e:
             logger.error(f"Error decoding JSON from {self.mapping_file}: {str(e)}. No mappings loaded.")
             self.provider_mappings = [] # Ensure it's an empty list on error
+        except PermissionError as e:
+            logger.critical(f"Permission denied when trying to read mapping file {self.mapping_file}: {str(e)}. Cannot load mappings.")
+            self.provider_mappings = [] # Ensure it's an empty list on error
         except IOError as e:
             logger.error(f"Error reading mapping file {self.mapping_file}: {str(e)}. No mappings loaded.")
             self.provider_mappings = [] # Ensure it's an empty list on error
@@ -92,6 +95,8 @@ class ProviderMapper:
             with open(self.mapping_file, 'w') as f:
                 json.dump(default_structure, f, indent=4)
             logger.info(f"Created default mapping file at {self.mapping_file}")
+        except PermissionError as e:
+            logger.critical(f"Permission denied when trying to create default mapping file at {self.mapping_file}: {str(e)}")
         except IOError as e:
             logger.error(f"Could not create default mapping file at {self.mapping_file}: {str(e)}")
 
@@ -257,6 +262,12 @@ class ProviderMapper:
             shutil.move(str(temp_file_path), str(self.mapping_file))
             logger.info(f"Saved {len(self.provider_mappings)} mappings atomically to {self.mapping_file}")
             
+        except PermissionError as e:
+             logger.critical(f"Permission denied during atomic save to {self.mapping_file}: {str(e)}. Save failed.")
+             # Clean up temp file if permission error occurred during move
+             if temp_file_path and temp_file_path.exists():
+                 try: os.remove(temp_file_path) 
+                 except OSError: pass # Ignore cleanup error
         except (IOError, OSError) as e:
             logger.error(f"Error during atomic save to {self.mapping_file}: {str(e)}")
             # Clean up temp file if it still exists upon error
