@@ -13,7 +13,7 @@
 - [x] Add version checking for JSON schema compatibility
 
 ## 3. Update Learning Mechanism
-- [ ] Modify `update_from_openai_result` to save new mappings to JSON
+- [x] Modify `update_from_openai_result` to save new mappings to JSON
 - [ ] Add validation for new mappings before saving
 - [ ] Implement deduplication of similar patterns
 - [ ] Add confidence scoring for learned patterns
