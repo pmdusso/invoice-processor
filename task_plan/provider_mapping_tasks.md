@@ -31,7 +31,7 @@
 
 ## 6. Documentation
 - [x] Document JSON schema
-- [ ] Add examples of valid mappings
+- [x] Add examples of valid mappings
 - [ ] Document backup and restore procedures
 - [ ] Add troubleshooting guide
 
