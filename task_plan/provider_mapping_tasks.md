@@ -27,7 +27,7 @@
 - [x] Create unit tests for JSON operations
 - [x] Add tests for learning mechanism
 - [x] Test file locking and concurrent access
-- [ ] Test backup and restore functionality
+- [x] Test backup and restore functionality
 
 ## 6. Documentation
 - [ ] Document JSON schema
