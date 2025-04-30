@@ -1,0 +1,36 @@
+{
+    "version": "1.0.0",
+    "last_updated": "2024-03-21T00:00:00Z",
+    "schema": {
+        "description": "Provider mapping configuration file",
+        "required_fields": ["pattern", "provider", "confidence", "last_used"],
+        "pattern_format": "regex",
+        "confidence_range": [0, 1]
+    },
+    "mappings": [
+        {
+            "pattern": "Anysphere,? Inc\\.?",
+            "provider": "Cursor",
+            "confidence": 1.0,
+            "last_used": "2024-03-21T00:00:00Z",
+            "source": "manual",
+            "examples": ["Anysphere, Inc.", "Anysphere Inc"]
+        },
+        {
+            "pattern": "cursor\\.ai",
+            "provider": "Cursor",
+            "confidence": 1.0,
+            "last_used": "2024-03-21T00:00:00Z",
+            "source": "manual",
+            "examples": ["cursor.ai"]
+        },
+        {
+            "pattern": "cursor\\.com",
+            "provider": "Cursor",
+            "confidence": 1.0,
+            "last_used": "2024-03-21T00:00:00Z",
+            "source": "manual",
+            "examples": ["cursor.com"]
+        }
+    ]
+} 
