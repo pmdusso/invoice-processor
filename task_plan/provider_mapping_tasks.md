@@ -2,8 +2,8 @@
 
 ## 1. Create JSON Structure
 - [x] Define the JSON schema for provider mappings
-- [ ] Create initial `provider_mappings.json` file with default mappings
-- [ ] Include metadata like last update timestamp and version
+- [x] Create initial `provider_mappings.json` file with default mappings
+- [x] Include metadata like last update timestamp and version
 
 ## 2. Modify ProviderMapper Class
 - [ ] Update `__init__` to load mappings from JSON file

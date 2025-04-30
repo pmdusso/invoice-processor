@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "last_updated": "2024-03-21T00:00:00Z",
+    "last_updated": "2024-07-28T10:00:00Z",
     "schema": {
         "description": "Provider mapping configuration file",
         "required_fields": ["pattern", "provider", "confidence", "last_used"],
@@ -12,7 +12,7 @@
             "pattern": "Anysphere,? Inc\\.?",
             "provider": "Cursor",
             "confidence": 1.0,
-            "last_used": "2024-03-21T00:00:00Z",
+            "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
             "examples": ["Anysphere, Inc.", "Anysphere Inc"]
         },
@@ -20,7 +20,7 @@
             "pattern": "cursor\\.ai",
             "provider": "Cursor",
             "confidence": 1.0,
-            "last_used": "2024-03-21T00:00:00Z",
+            "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
             "examples": ["cursor.ai"]
         },
@@ -28,9 +28,107 @@
             "pattern": "cursor\\.com",
             "provider": "Cursor",
             "confidence": 1.0,
-            "last_used": "2024-03-21T00:00:00Z",
+            "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
             "examples": ["cursor.com"]
+        },
+        {
+            "pattern": "anthropic",
+            "provider": "Anthropic, PBC",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "anysphere",
+            "provider": "Cursor",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "storylane",
+            "provider": "Storylane, Inc.",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "lunaweb",
+            "provider": "Lunaweb GmbH",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "manus ai",
+            "provider": "Manus AI",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "manus\\.ai",
+            "provider": "Manus AI",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "tam linhas",
+            "provider": "TAM Linhas Aéreas S.A.",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "latam",
+            "provider": "TAM Linhas Aéreas S.A.",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "openai",
+            "provider": "OpenAI, Inc.",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "github",
+            "provider": "GitHub, Inc.",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "google",
+            "provider": "Google LLC",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "microsoft",
+            "provider": "Microsoft Corporation",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "aws",
+            "provider": "Amazon Web Services",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
+        },
+        {
+            "pattern": "azure",
+            "provider": "Microsoft Azure",
+            "confidence": 0.9,
+            "last_used": "2024-07-28T10:00:00Z",
+            "source": "default"
         }
     ]
 } 
