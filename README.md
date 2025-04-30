@@ -69,6 +69,19 @@ pypdf2
 forex-python
 ```
 
+## Troubleshooting
+
+*   **`ValueError: OpenAI API key not found`**: Ensure you have created a `.env` file in the project root and added your `OPENAI_API_KEY` correctly.
+*   **`FileNotFoundError` for input folder**: Make sure the `input_invoices` folder exists in the same directory as the script, or create it.
+*   **Errors processing specific PDFs**: Some PDFs might be image-based, encrypted, or have unusual formatting that `PyPDF2` cannot read. Check the PDF manually. The script will log errors for specific files.
+*   **Provider mapping file errors (`JSONDecodeError`, `IOError`, `PermissionError`)**: 
+    *   Check the logs (`invoice_processor.log`) for specific error messages.
+    *   Ensure `provider_mappings.json` is valid JSON if edited manually.
+    *   Check file permissions for `provider_mappings.json`.
+    *   Try restoring from `provider_mappings.json.bak` if the main file is corrupted (see Restore procedure above).
+*   **Invalid regex pattern warnings**: If you manually add patterns to `provider_mappings.json`, ensure they are valid Python regular expressions. The script will log warnings for invalid patterns found during loading or adding.
+*   **Incorrect BRL conversion**: The script currently uses a hardcoded BRL rate in `process_invoices.py`. Modify the `convert_usd_to_brl` function if you need live rates or a different fixed rate.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 

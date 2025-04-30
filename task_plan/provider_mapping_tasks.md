@@ -33,7 +33,7 @@
 - [x] Document JSON schema
 - [x] Add examples of valid mappings
 - [x] Document backup and restore procedures
-- [ ] Add troubleshooting guide
+- [x] Add troubleshooting guide
 
 ## 7. Integration
 - [ ] Update main script to handle JSON file not found
