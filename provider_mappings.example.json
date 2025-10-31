@@ -1,0 +1,61 @@
+{
+  "_comment_schema": "This file defines regex patterns to identify invoice providers.",
+  "version": "1.0.0",
+  "last_updated": "2024-07-28T12:00:00.000000Z",
+  "schema": {
+    "_comment": "Defines the structure and rules for the mappings.",
+    "description": "Provider mapping configuration file",
+    "required_fields": [
+      "pattern",
+      "provider",
+      "confidence",
+      "last_used"
+    ],
+    "pattern_format": "regex",
+    "confidence_range": [
+      0,
+      1
+    ]
+  },
+  "mappings": [
+    {
+      "_comment": "Example mapping for OpenAI",
+      "pattern": "openai",
+      "provider": "OpenAI",
+      "confidence": 0.9,
+      "last_used": null,
+      "source": "example",
+      "examples": [
+        "OpenAI",
+        "openai",
+        "OpenAI LLC"
+      ]
+    },
+    {
+      "_comment": "Example mapping for Anthropic",
+      "pattern": "anthropic",
+      "provider": "Anthropic",
+      "confidence": 0.9,
+      "last_used": null,
+      "source": "example",
+      "examples": [
+        "Anthropic",
+        "anthropic",
+        "Anthropic PBC"
+      ]
+    },
+    {
+      "_comment": "Example mapping for Cursor",
+      "pattern": "cursor",
+      "provider": "Cursor",
+      "confidence": 0.9,
+      "last_used": null,
+      "source": "example",
+      "examples": [
+        "Cursor",
+        "cursor",
+        "Cursor AI"
+      ]
+    }
+  ]
+}

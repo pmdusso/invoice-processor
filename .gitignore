@@ -1,24 +1,63 @@
-# Input and output folders (but keep .gitkeep files)
-input_invoices/*
-!input_invoices/.gitkeep
-processed_invoices/*
-!processed_invoices/.gitkeep
+# ========================================
+# 🚨 CRITICAL: Sensitive Data Protection
+# ========================================
+# These files contain sensitive data and should NEVER be committed
 
-# Logs
-*.log
-invoice_processor.log
-
-# Environment files
+# Environment Configuration (contains API keys)
 .env
 .env.local
 .env.*.local
+.env.production
+.env.staging
+.env.development
 
-# Python
+# Provider Mappings (contains learned patterns from your invoices)
+provider_mappings.json
+provider_mappings.json.bak
+provider_mappings.json.*
+
+# Logs and Debug Files (contains invoice content and API responses)
+*.log
+*.logs
+invoice_processor.log
+debug.log
+error.log
+access.log
+
+# ========================================
+# 📁 Input/Output Data (contains actual invoices)
+# ========================================
+# Input and output folders (but keep .gitkeep files and README)
+input_invoices/*
+!input_invoices/.gitkeep
+!input_invoices/README.md
+processed_invoices/*
+!processed_invoices/.gitkeep
+!processed_invoices/README.md
+
+# Export files with real data
+*.csv
+*.json
+!*.example.json
+!*.example.csv
+results.*
+export.*
+audit.*
+batch_*
+analysis_*
+
+# ========================================
+# 🐍 Python Development Files
+# ========================================
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+
+# Distribution / packaging
+.build/
 build/
 develop-eggs/
 dist/
@@ -31,27 +70,292 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual environments
-venv/
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
 env/
+venv/
 ENV/
+env.bak/
+venv.bak/
 
-# IDE
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ========================================
+# 💻 IDE and Editor Files
+# ========================================
+# VSCode
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm
 .idea/
+*.iws
+*.iml
+*.ipr
+
+# Vim
 *.swp
 *.swo
 *~
 
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ========================================
+# 🍎 Operating System Files
+# ========================================
 # macOS
 .DS_Store
 .AppleDouble
 .LSOverride
+Icon
+._*
 
+# Thumbnails
+._*
+Thumbs.db
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ========================================
+# 🔄 Backup and Temporary Files
+# ========================================
 # Backup files
 *.bak
 *.backup
+*.backup.*
+*.old
+*.orig
+*.rej
+*.save
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.#*
+
+# ========================================
+# 🔐 Security and Configuration
+# ========================================
+# Certificate files
+*.pem
+*.key
+*.crt
+*.p12
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration files with secrets
+config/secrets.yml
+config/production.yml
+config/local.yml
+secrets.txt
+
+# ========================================
+# 📊 Analytics and Reports
+# ========================================
+# Processing results with real data
+processing_results.*
+validation_results.*
+audit_trail.*
+cost_analysis.*
+usage_statistics.*
+
+# ========================================
+# 🧪 Test Data (real data only)
+# ========================================
+# Keep example test data but ignore real test data
+test_data/real/*
+test_data/production/*
+test_data/live/*
+
+# ========================================
+# 📝 Documentation Build Files
+# ========================================
+# Documentation build artifacts
+docs/_build/
+docs/build/
+site/
+
+# ========================================
+# 🚀 Deployment and CI/CD
+# ========================================
+# Deployment files
+deploy/
+deployment/
+.kube/
+*.tfstate
+*.tfvars
+terraform.tfstate
+terraform.tfvars.backup
+
+# CI/CD
+.github/workflows/temp/
+.gitlab-ci-local/
+bitbucket-pipelines.yml.local
+
+# ========================================
+# 📦 Package Manager Files
+# ========================================
+# npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Composer
+vendor/
+composer.phar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
