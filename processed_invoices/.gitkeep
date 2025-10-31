@@ -1,0 +1,2 @@
+# This file ensures the processed_invoices directory is tracked by git
+# Processed invoices will appear here after running the processor

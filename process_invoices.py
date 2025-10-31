@@ -1,6 +1,7 @@
 import os
 import openai
 import PyPDF2
+import re # Import regex module
 from forex_python.converter import CurrencyRates  # type: ignore
 from openai import OpenAI
 from pathlib import Path
@@ -60,11 +61,26 @@ def extract_text_from_pdf(pdf_path):
             text += page.extract_text()
         return text
 
+def classify_document_type(text: str) -> str:
+    """Classifies document as Invoice or Receipt based on keywords."""
+    text_lower = text.lower()
+    # Prioritize receipt keywords
+    if re.search(r'\breceipt\b|\brecibo\b', text_lower):
+        return "Receipt"
+    # Check for invoice keywords (optional, could just be the default)
+    # elif re.search(r'\binvoice\b|\bfatura\b', text_lower):
+    #     return "Invoice"
+    
+    # Default to Invoice if no specific receipt keywords found
+    return "Invoice" 
+
 # Function to interact with OpenAI for extracting invoice details
 def get_invoice_details(pdf_text, provider_mapper=None):
-    """Extracts invoice details, using provider mapping first if available."""
+    """Extracts invoice details, using provider mapping first if available.
+    Returns a tuple: (provider, date_str, usd_amount, brl_amount, doc_type, openai_provider_id_used)
+    """
     provider_from_mapping = None
-    openai_called = False # Track if OpenAI was needed
+    openai_provider_id_used = False # Track if OpenAI was needed for provider ID specifically
 
     if provider_mapper:
         provider_from_mapping = provider_mapper.identify_provider(pdf_text)
@@ -72,12 +88,17 @@ def get_invoice_details(pdf_text, provider_mapper=None):
             logger.info(f"Provider identified from mapping: {provider_from_mapping}")
         else:
             logger.info("Provider not found in mapping, will use OpenAI for identification.")
-            openai_called = True # OpenAI will be called for full details
+            openai_provider_id_used = True # OpenAI will be called for provider ID
     else:
         logger.warning("ProviderMapper not available, using OpenAI for all details.")
-        openai_called = True # OpenAI will be called
+        openai_provider_id_used = True # OpenAI will be called for provider ID
 
-    # If we have a provider from mapping, construct the prompt to extract only date and amount
+    # --- Determine Document Type ---    
+    doc_type = classify_document_type(pdf_text)
+    logger.info(f"Document classified as: {doc_type}")
+
+    # --- Call OpenAI --- 
+    # (Prompts remain the same, we just parse differently)
     if provider_from_mapping:
         prompt = (
             f"I already know the service provider is '{provider_from_mapping}'.\n"
@@ -134,13 +155,13 @@ def get_invoice_details(pdf_text, provider_mapper=None):
     date = datetime.strptime(date_str, "%d_%m_%Y")
     
     # Convert USD amount to float
-    usd_amount = float(usd_amount_str)
+    usd_amount = float(usd_amount_str.replace(',', '.')) # Handle comma as decimal separator
     
     # Get BRL amount
     brl_amount = convert_usd_to_brl(usd_amount)
     
-    # Return formatted string AND whether OpenAI was called for provider ID
-    return f"{provider} - {date_str} - USD {usd_amount} - BRL {brl_amount}", not provider_from_mapping and openai_called
+    # Return structured data
+    return provider, date_str, usd_amount, brl_amount, doc_type, openai_provider_id_used
 
 # Function to convert USD to BRL using forex-python
 def convert_usd_to_brl(usd_amount: float) -> float:
@@ -174,11 +195,14 @@ def process_file(filepath, provider_mapper=None):
         # Extract text from PDF
         pdf_text = extract_text_from_pdf(filepath)
         
-        # Extract invoice details using OpenAI
-        invoice_details, openai_id_used = get_invoice_details(pdf_text, provider_mapper)
+        # Extract invoice details
+        provider, date_str, usd_amount, brl_amount, doc_type, openai_id_used = get_invoice_details(pdf_text, provider_mapper)
         
+        # Construct details string for filename
+        details_for_filename = f"{provider} - {doc_type} - {date_str} - USD {usd_amount:.2f} - BRL {brl_amount:.2f}"
+
         # Sanitize the new filename to remove/replace invalid characters
-        new_filename = sanitize_filename(f"{invoice_details}.pdf")
+        new_filename = sanitize_filename(f"{details_for_filename}.pdf")
         new_filepath = output_folder / new_filename
         
         # Ensure we don't try to rename if the file already exists

@@ -1,13 +1,21 @@
 {
     "_comment_schema": "This file defines regex patterns to identify invoice providers.",
     "version": "1.0.0",
-    "last_updated": "2024-07-28T10:00:00Z",
+    "last_updated": "2025-10-31T14:27:36.475643Z",
     "schema": {
         "_comment": "Defines the structure and rules for the mappings.",
         "description": "Provider mapping configuration file",
-        "required_fields": ["pattern", "provider", "confidence", "last_used"],
+        "required_fields": [
+            "pattern",
+            "provider",
+            "confidence",
+            "last_used"
+        ],
         "pattern_format": "regex",
-        "confidence_range": [0, 1]
+        "confidence_range": [
+            0,
+            1
+        ]
     },
     "mappings": [
         {
@@ -17,7 +25,10 @@
             "confidence": 1.0,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
-            "examples": ["Anysphere, Inc.", "Anysphere Inc"]
+            "examples": [
+                "Anysphere, Inc.",
+                "Anysphere Inc"
+            ]
         },
         {
             "pattern": "cursor\\.ai",
@@ -25,7 +36,9 @@
             "confidence": 1.0,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
-            "examples": ["cursor.ai"]
+            "examples": [
+                "cursor.ai"
+            ]
         },
         {
             "pattern": "cursor\\.com",
@@ -33,11 +46,13 @@
             "confidence": 1.0,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "manual",
-            "examples": ["cursor.com"]
+            "examples": [
+                "cursor.com"
+            ]
         },
         {
             "pattern": "anthropic",
-            "provider": "Anthropic, PBC",
+            "provider": "CLAUDE AI ",
             "confidence": 0.9,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "default"
@@ -58,10 +73,10 @@
         },
         {
             "pattern": "lunaweb",
-            "provider": "Lunaweb GmbH",
+            "provider": "CloudConvert",
             "confidence": 0.9,
             "last_used": "2024-07-28T10:00:00Z",
-            "source": "default"
+            "source": "manual"
         },
         {
             "pattern": "manus ai",
@@ -79,14 +94,14 @@
         },
         {
             "pattern": "tam linhas",
-            "provider": "TAM Linhas Aéreas S.A.",
+            "provider": "TAM Linhas A\u00e9reas S.A.",
             "confidence": 0.9,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "default"
         },
         {
             "pattern": "latam",
-            "provider": "TAM Linhas Aéreas S.A.",
+            "provider": "TAM Linhas A\u00e9reas S.A.",
             "confidence": 0.9,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "default"
@@ -132,6 +147,162 @@
             "confidence": 0.9,
             "last_used": "2024-07-28T10:00:00Z",
             "source": "default"
+        },
+        {
+            "pattern": "atlassian",
+            "provider": "Atlassian",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "claude",
+            "provider": "Anthropic, PBC",
+            "confidence": 0.9,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "cloud.?convert",
+            "provider": "CloudConvert",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "latam air",
+            "provider": "TAM Linhas A\u00e9reas S.A.",
+            "confidence": 0.9,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "le bife",
+            "provider": "Le Bife Restaurante",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "linkedin",
+            "provider": "LinkedIn",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "chatgpt",
+            "provider": "OpenAI, Inc.",
+            "confidence": 0.9,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "paes de araujo",
+            "provider": "Paes de Araujo Planx",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "paypal",
+            "provider": "PayPal",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "smallpdf",
+            "provider": "Smallpdf",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "soul good bakery",
+            "provider": "Soul Good Bakery",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "typeform",
+            "provider": "Typeform",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "upstream ag",
+            "provider": "Upstream AG",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "zapier\\.com",
+            "provider": "Zapier",
+            "confidence": 0.95,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "zapier",
+            "provider": "Zapier",
+            "confidence": 0.9,
+            "last_used": null,
+            "source": "manual"
+        },
+        {
+            "pattern": "Replit\\ Inc",
+            "provider": "Replit Inc",
+            "confidence": 0.85,
+            "last_used": "2025-06-03T18:10:34.947802Z",
+            "source": "learned_openai"
+        },
+        {
+            "pattern": "SatisMet",
+            "provider": "SatisMeters s.r.o.",
+            "confidence": 0.75,
+            "last_used": "2025-07-04T12:12:38.075245Z",
+            "source": "learned_openai_partial"
+        },
+        {
+            "pattern": "GOL\\ LINHAS\\ AEREAS",
+            "provider": "GOL LINHAS AEREAS",
+            "confidence": 0.85,
+            "last_used": "2025-07-04T12:28:44.247981Z",
+            "source": "learned_openai"
+        },
+        {
+            "pattern": "[Ww]indsurf",
+            "provider": "Exafunction Inc.",
+            "confidence": 1.0,
+            "last_used": null,
+            "source": "manual",
+            "examples": [
+                "Windsurf",
+                "windsurf"
+            ]
+        },
+        {
+            "pattern": "[Cc][Yy][Bb][Ee][Rr][Pp][Oo][Ss][Tt]",
+            "provider": "NordVPN",
+            "confidence": 1.0,
+            "last_used": null,
+            "source": "manual",
+            "examples": [
+                "CYBERPOST",
+                "cyberpost",
+                "Cyberpost"
+            ]
+        },
+        {
+            "pattern": "test",
+            "provider": "Test Company Inc.",
+            "confidence": 0.75,
+            "last_used": "2025-10-31T14:27:36.474978Z",
+            "source": "learned_openai_partial"
         }
     ]
-} 
+}
