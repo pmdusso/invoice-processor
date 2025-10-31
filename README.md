@@ -23,8 +23,8 @@ A sophisticated AI-powered invoice processing system that extracts information f
 ### 1. Installation
 ```bash
 # Clone the repository
-git clone <repository_url>
-cd process_invoices
+git clone https://github.com/yourusername/invoice-processor.git
+cd invoice-processor
 
 # Create virtual environment
 python3 -m venv venv
@@ -179,20 +179,21 @@ python test_provider_mapping.py
 ## 📁 File Structure
 
 ```
-process_invoices/
-├── improved_invoice_processor.py    # Main processor with advanced features
-├── process_invoices.py              # Basic processor (legacy)
-├── provider_mapping.py              # Provider recognition system
-├── provider_mappings.json           # Provider pattern database
-├── test_invoice_processor.py        # Comprehensive test suite
-├── test_provider_mapping.py         # Provider mapping tests
-├── requirements.txt                 # Python dependencies
-├── .env                             # Environment configuration
-├── .gitignore                      # Git ignore rules
-├── input_invoices/                 # Source PDF files
-├── processed_invoices/             # Processed results
-├── examples_advanced_usage.md      # Advanced usage examples
-└── invoice_processor.log           # Processing logs
+invoice-processor/
+├── improved_invoice_processor.py       # Main processor with advanced features
+├── process_invoices.py                 # Basic processor (legacy)
+├── provider_mapping.py                 # Provider recognition system
+├── provider_mappings.example.json      # Example provider patterns
+├── test_invoice_processor.py           # Comprehensive test suite
+├── test_provider_mapping.py            # Provider mapping tests
+├── requirements.txt                    # Python dependencies
+├── .env.example                        # Environment configuration template
+├── .gitignore                          # Git ignore rules
+├── CONTRIBUTING.md                     # Contribution guidelines
+├── SECURITY.md                         # Security best practices
+├── examples_advanced_usage.md          # Advanced usage examples
+├── input_invoices/                     # Source PDF files
+└── processed_invoices/                 # Processed results
 ```
 
 ## 🔧 Provider Mapping System
@@ -295,12 +296,6 @@ python improved_invoice_processor.py --export-json audit_$(date +%Y%m%d).json --
 # Daily processing at 2 AM
 0 2 * * * cd /path/to/invoice_processor && python improved_invoice_processor.py --export-json /logs/$(date +\%Y\%m\%d)_results.json --stats >> /logs/$(date +\%Y\%m\%d)_processing.log 2>&1
 ```
-
-## 📚 Documentation
-
-- **[Advanced Usage Examples](examples_advanced_usage.md)** - Detailed usage scenarios
-- **[Task Plan](task_plan/improvement_plan.md)** - Development roadmap and completed features
-- **[Provider Mapping Tasks](task_plan/provider_mapping_tasks.md)** - Provider system implementation details
 
 ## 🛠️ Development
 
